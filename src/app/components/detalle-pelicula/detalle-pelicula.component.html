@@ -1,0 +1,9 @@
+<div class="container" *ngIf="peliculaParaMostrar">
+    <div class="col-md-4">
+        <h2>Detalle Pelicula</h2>
+        <p>{{ peliculaParaMostrar.nombre }}</p>
+        <p>{{ peliculaParaMostrar.cantidadDePublico }}</p>
+        <p>{{ peliculaParaMostrar.tipo }}</p>
+        <img [src]="peliculaParaMostrar.fotoPelicula" [alt]="">
+    </div>
+</div>

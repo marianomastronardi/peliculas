@@ -1,0 +1,11 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <!-- <h1 class="display-3">Listado de Peliculas</h1>
+        <p>Se deben utilizar tanto listado como grilla, con la posibilidad de intercalar la vista entre ambas</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">cambiar vista</a></p> -->
+        <ul>
+            <li *ngFor="let pelicula of listadoDePeliculas"><span>{{ pelicula.nombre }}</span><button (click)="seleccionPelicula(pelicula)">Seleccionar Pelicula</button></li>
+        </ul>
+    </div>
+</div>
