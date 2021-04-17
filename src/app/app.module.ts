@@ -10,6 +10,9 @@ import { TablaPeliculaComponent } from './components/tabla-pelicula/tabla-pelicu
 import { DetallePeliculaComponent } from './components/detalle-pelicula/detalle-pelicula.component';
 import { AltaPeliculaComponent } from './components/alta-pelicula/alta-pelicula.component';
 import { FormsModule } from '@angular/forms';
+import { TablaActorComponent } from './components/tabla-actor/tabla-actor.component';
+import { PeliculaAltaComponent } from './components/pelicula-alta/pelicula-alta.component';
+import { PeliculaListadoComponent } from './components/pelicula-listado/pelicula-listado.component';
   
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     TablaPeliculaComponent,
     DetallePeliculaComponent,
-    AltaPeliculaComponent
+    AltaPeliculaComponent,
+    TablaActorComponent,
+    PeliculaAltaComponent,
+    PeliculaListadoComponent
   ],
   imports: [
     BrowserModule,
