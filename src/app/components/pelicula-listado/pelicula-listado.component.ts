@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Mode } from 'src/app/models/mode.enum';
+import { Pelicula } from 'src/app/models/pelicula';
 
 @Component({
   selector: 'app-pelicula-listado',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeliculaListadoComponent implements OnInit {
 
-  constructor() { }
+  @Input() listadoDePeliculas:Pelicula[] = [];
+  @Input() borrado!:number;
+  @Output() eventSendSelectedMovie:EventEmitter<any> = new EventEmitter<any>();
+  @Output() eventDelMovie:EventEmitter<any> = new EventEmitter<any>();
+  peliculaSeleccionada!: Pelicula;
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
+  }
+
+  cargarPeliculaSeleccionada(pelicula: Pelicula) {
+    this.peliculaSeleccionada = pelicula;
+    this.eventSendSelectedMovie.emit(this.peliculaSeleccionada)
+  }
+
+  deleteMovie(pelicula:Pelicula){
+    this.eventDelMovie.emit(pelicula);
   }
 
 }

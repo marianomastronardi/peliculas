@@ -16,5 +16,6 @@ export class Pelicula{
         this.fechaDeEstreno = '';
         this.cantidadDePublico = 0;
         this.fotoPelicula = '';
+        this.actores = [];
     } 
 }

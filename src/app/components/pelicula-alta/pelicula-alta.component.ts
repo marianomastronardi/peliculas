@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Actores } from 'src/app/models/actores';
+import { Pelicula } from 'src/app/models/pelicula';
 
 @Component({
   selector: 'app-pelicula-alta',
@@ -8,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeliculaAltaComponent implements OnInit {
 
-  constructor() { }
+  @Input() peliculaEdit!:Pelicula;
+  @Output() eventSaveMovie:EventEmitter<any> = new EventEmitter<any>();
+
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
 
+  save(){
+    this.eventSaveMovie.emit(this.peliculaEdit);
+  }
+
+  addActor(actor:Actores){
+    this.peliculaEdit.actores.push(actor);
+  }
 }

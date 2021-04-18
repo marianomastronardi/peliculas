@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Mode } from 'src/app/models/mode.enum';
 import { Pelicula } from 'src/app/models/pelicula';
 
 @Component({
@@ -17,9 +18,8 @@ export class AltaPeliculaComponent implements OnInit {
   }
 
   guardarNuevaPelicula(){
-    console.log('guardarNuevaPelicula',this.peliculaNueva)
-    this.eventoCreacionNuevaPelicula.emit(this.peliculaNueva);
-
+    //this.eventoCreacionNuevaPelicula.emit(this.peliculaNueva);
+    this.eventoCreacionNuevaPelicula.emit(Mode.create);
   }
 
   hacerNuevaPelicula(){
