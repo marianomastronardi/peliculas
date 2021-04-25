@@ -10,6 +10,7 @@ export class TablaPaisesComponent implements OnInit {
 
   @Output() eventSendCountry:EventEmitter<any> = new EventEmitter<any>();
   paises:any[] = []
+  
   constructor(private _paisService: PaisService) { }
 
   ngOnInit(): void {

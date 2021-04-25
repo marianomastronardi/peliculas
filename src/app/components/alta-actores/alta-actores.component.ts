@@ -1,5 +1,7 @@
+import { ɵBrowserPlatformLocation } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Actores } from 'src/app/models/actores';
 
 @Component({
@@ -11,7 +13,10 @@ export class AltaActoresComponent implements OnInit {
 
   public fg!: FormGroup;
   actor:Actores;
-  constructor(private fb:FormBuilder) {
+  formValid:boolean = true;
+
+  constructor(private fb:FormBuilder,
+    private route:Router) {
     this.actor = new Actores();
    }
 
@@ -32,8 +37,15 @@ export class AltaActoresComponent implements OnInit {
   }
 
   save(){
-    console.log(this.actor)
-    console.log(this.fg)
+    if(this.fg.valid){
+      //save
+      this.route.navigate(['bienvenidos']);
+    }else{
+      this.formValid = !this.formValid;
+      setTimeout(() => {
+        this.formValid = !this.formValid;
+      }, 2000);
+    }
   }
 
 }
