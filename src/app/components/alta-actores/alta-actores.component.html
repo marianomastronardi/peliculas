@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <app-tabla-paises (eventSendCountry)="setCountry($event)"></app-tabla-paises>
+        </div>
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Alta Actor</h4>
+            <form class="needs-validation" [formGroup]="fg" (ngSubmit)="save()">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Nombre</label>
+                        <input type="text" class="form-control" id="firstName" [(ngModel)]="actor.nombre" placeholder="Ingrese un nombre" formControlName="nombre">
+                        <small class="invalid" *ngIf="fg.get('nombre')?.errors?.required && fg.get('nombre')?.touched">El nombre es
+                            requerido</small>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Apellido</label>
+                        <input type="text" class="form-control" id="lastName" [(ngModel)]="actor.apellido" placeholder="Ingrese el Apellido" formControlName="apellido">
+                        <small class="invalid" *ngIf="fg.get('apellido')?.errors?.required && fg.get('apellido')?.touched">El apellido es
+                            requerido</small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="country">Pais</label>
+                        <input type="text" class="form-control" id="country" [(ngModel)]="actor.pais" placeholder="Ingrese un pais" formControlName="country">
+                        <small class="invalid" *ngIf="fg.get('country')?.errors?.required && fg.get('country')?.touched">El pais es
+                            requerido</small>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="birthday">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="birthday" [(ngModel)]="actor.fechaNacimiento" formControlName="fechaNacimiento">
+                        <small class="invalid" *ngIf="fg.get('fechaNacimiento')?.errors?.required && fg.get('fechaNacimiento')?.touched">La
+                            fecha de Nacimiento es requerida</small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="country">Sexo</label>
+                        <select class="custom-select d-block w-100" id="country" [(ngModel)]="actor.sexo" formControlName="sexo">
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                        </select>
+                        <small class="invalid" *ngIf="fg.get('sexo')?.errors?.required && fg.get('sexo')?.touched">El sexo es requerido</small>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_actor">ID</label>
+                        <input type="text" class="form-control" id="id_actor" placeholder="001" [(ngModel)]="actor.id" formControlName="id_actor">
+                        <small class="invalid" *ngIf="fg.get('id_actor')?.errors?.required && fg.get('id_actor')?.touched">El ID es
+                            requerido</small>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
