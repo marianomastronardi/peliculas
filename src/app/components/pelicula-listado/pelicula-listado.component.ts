@@ -10,7 +10,6 @@ import { Pelicula } from 'src/app/models/pelicula';
 export class PeliculaListadoComponent implements OnInit {
 
   @Input() listadoDePeliculas:Pelicula[] = [];
-  @Input() borrado!:number;
   @Output() eventSendSelectedMovie:EventEmitter<any> = new EventEmitter<any>();
   @Output() eventDelMovie:EventEmitter<any> = new EventEmitter<any>();
   peliculaSeleccionada!: Pelicula;

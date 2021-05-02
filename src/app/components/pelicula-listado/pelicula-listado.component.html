@@ -1,8 +1,10 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-< <!-- <h1 class="display-3">Listado de Peliculas</h1>
-    <p>Se deben utilizar tanto listado como grilla, con la posibilidad de intercalar la vista entre ambas</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">cambiar vista</a></p> -->
-    <!-- ul>
-            <li *ngFor="let pelicula of listadoDePeliculas"><span>{{ pelicula.nombre }}</span><button (click)="seleccionPelicula(pelicula)">Seleccionar Pelicula</button></li>
-        </ul> -->
-    <app-tabla-pelicula [listadoDePeliculas]="listadoDePeliculas" (eventDeleteMovie)="deleteMovie($event)" (peliculaSeleccionadaEvento)="cargarPeliculaSeleccionada($event)" [borrado]="borrado"></app-tabla-pelicula>
+<!-- <app-tabla-pelicula [listadoDePeliculas]="listadoDePeliculas" (eventDeleteMovie)="deleteMovie($event)" (peliculaSeleccionadaEvento)="cargarPeliculaSeleccionada($event)" [borrado]="borrado"></app-tabla-pelicula> -->
+<table>
+    <tbody>
+        <tr *ngFor="let pelicula of listadoDePeliculas">
+            <td><span>{{ pelicula.nombre }}</span></td>
+            <td><button class="btn btn-outline-primary m-1" (click)="cargarPeliculaSeleccionada(pelicula)">Seleccionar Pelicula</button></td>
+            <td><button class="btn btn-outline-secondary m-1" (click)="deleteMovie(pelicula)">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Actores } from 'src/app/models/actores';
+import { ActorService } from 'src/app/services/actor.service';
 
 @Component({
   selector: 'app-alta-actores',
@@ -16,7 +17,8 @@ export class AltaActoresComponent implements OnInit {
   formValid:boolean = true;
 
   constructor(private fb:FormBuilder,
-    private route:Router) {
+    private route:Router,
+    private _actorService:ActorService) {
     this.actor = new Actores();
    }
 
@@ -28,24 +30,18 @@ export class AltaActoresComponent implements OnInit {
       'fechaNacimiento': ['', [Validators.required]],
       'sexo': ['', Validators.required],
       'country': ['', Validators.required],
+      'photo': ['', Validators.required],
     })
     this.fg.controls['sexo'].patchValue('Femenino');
   }
 
   setCountry(pais:any){
-    this.actor.pais = pais.name;
+    this.actor.pais = pais;
   }
 
   save(){
-    if(this.fg.valid){
-      //save
-      this.route.navigate(['bienvenidos']);
-    }else{
-      this.formValid = !this.formValid;
-      setTimeout(() => {
-        this.formValid = !this.formValid;
-      }, 2000);
-    }
+    this._actorService.create(this.actor);
+    this.route.navigate(['/buscarPelicula']);
   }
 
 }

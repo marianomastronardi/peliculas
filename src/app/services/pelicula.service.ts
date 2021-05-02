@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Actores } from '../models/actores';
 import { Pelicula } from '../models/pelicula';
 
 @Injectable({
@@ -16,6 +17,14 @@ export class PeliculaService {
 
   getAll(): AngularFirestoreCollection<Pelicula> {
     return this.PeliculaRef;
+  }
+
+  getById(id:string): AngularFirestoreCollection<Pelicula> {
+    return  this.db.collection(this.dbPath, ref => ref.where('id', '==', id));
+  }
+
+  getMovieByActor(actor:Actores): AngularFirestoreCollection<Pelicula> {
+    return  this.db.collection(this.dbPath, ref => ref.where('actores', '==', actor));
   }
 
   create(pelicula: Pelicula): any {

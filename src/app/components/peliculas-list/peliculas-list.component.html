@@ -1,0 +1,11 @@
+<div *ngFor="let pelicula of listaPeliculas; let i=index">
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+                <h6 class="my-0">Titulo</h6>
+                <small class="text-muted">{{pelicula.nombre}}</small>
+            </div>
+            <span class="text-muted">{{pelicula.tipo}}</span>
+        </li>
+    </ul>
+</div>

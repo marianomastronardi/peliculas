@@ -1,50 +1,31 @@
-<!-- <main role="main">
-    <br>
-    
-    <app-alta-pelicula (eventoCreacionNuevaPelicula)="loadAlta($event)"></app-alta-pelicula>
-    <app-pelicula-listado (eventSendSelectedMovie)="selectedMovie($event)" (eventDelMovie)="deleteMovie($event)" [borrado]="borrado" [listadoDePeliculas]="listadoDePeliculas"></app-pelicula-listado>
-
-    <app-detalle-pelicula *ngIf="states.details" [peliculaParaMostrar]="peliculaSeleccionada">
-    </app-detalle-pelicula>
-    <app-pelicula-alta *ngIf="states.create || states.edit" (eventSaveMovie)="cargarNuevaPelicula($event)" [peliculaEdit]="peliculaSeleccionada"></app-pelicula-alta>
-
-</main> -->
 <main role="main">
     <br>
+    <div><button class="btn btn-outline-dark" (click)="nuevaPelicula()">Nueva Pelicula</button></div><br>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-            <app-alta-pelicula (eventoCreacionNuevaPelicula)="loadAlta($event)"></app-alta-pelicula>
-            <app-pelicula-listado (eventSendSelectedMovie)="selectedMovie($event)" (eventDelMovie)="deleteMovie($event)" [borrado]="borrado" [listadoDePeliculas]="listadoDePeliculas"></app-pelicula-listado>
+            <app-pelicula-listado (eventSendSelectedMovie)="selectedMovie($event)" (eventDelMovie)="deleteMovie($event)" [listadoDePeliculas]="listadoDePeliculas"></app-pelicula-listado>
         </div>
     </div>
 
     <div class="container">
         <!-- Example row of columns -->
+
         <div class="row">
             <div class="col-md-4">
-                <app-detalle-pelicula *ngIf="states.details" [peliculaParaMostrar]="peliculaSeleccionada">
+                <app-detalle-pelicula *ngIf="peliculaSeleccionada.id != ''" [peliculaParaMostrar]="peliculaSeleccionada">
                 </app-detalle-pelicula>
-                <app-pelicula-alta *ngIf="states.create || states.edit" (eventSaveMovie)="cargarNuevaPelicula($event)" [peliculaEdit]="peliculaSeleccionada"></app-pelicula-alta>
             </div>
 
             <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Standing on the frontline when the bombs start to fall. Heaven is jealous of our love, angels are crying from up above. Can't replace you with a million rings. Boy, when you're with me I'll give you a taste. There’s no going back. Before
-                    you met me I was alright but things were kinda heavy. Heavy is the head that wears the crown.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                <app-actor-listado *ngIf="peliculaSeleccionada.id != ''" [listaActores]="peliculaSeleccionada.actores" [details]="details" (eventActorDetail)="viewDetails($event)"></app-actor-listado>
             </div>
             <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Playing ping pong all night long, everything's all neon and hazy. Yeah, she's so in demand. She's sweet as pie but if you break her heart. But down to earth. It's time to face the music I'm no longer your muse. I guess that I forgot I
-                    had a choice.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                <app-tabla-actor *ngIf="actorSelected" [actor]="actorSelected"></app-tabla-actor>
             </div>
         </div>
 
         <hr>
 
     </div>
-    <!-- /container -->
-
 </main>

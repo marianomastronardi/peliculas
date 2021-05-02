@@ -4,7 +4,7 @@ export class Actores {
     apellido!:string;
     sexo!:string;
     fechaNacimiento!:string;
-    pais!:string;
+    pais!:any;
     foto!:string;
 
     constructor(){
@@ -13,7 +13,7 @@ export class Actores {
     this.apellido = '';
     this.sexo = '';
     this.fechaNacimiento = '';
-    this.pais = '';
+    this.pais = {};
     this.foto = '';
     }
 }

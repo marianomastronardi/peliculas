@@ -1,0 +1,8 @@
+<div *ngFor="let actor of listaActores; let i=index">
+    <h5>{{actor.nombre}} {{actor.apellido}}</h5>
+    <div *ngIf="details"><button class="btn btn-secondary" (click)="viewDetails(actor)">Ver detalles »</button></div>
+    <div *ngIf="!details">
+        <button type="button" class="btn btn-secondary m-1" (click)="seleccionar(actor)">Seleccionar</button>
+        <button type="button" class="btn btn-secondary m-1" (click)="quitar(actor)">Quitar</button>
+    </div>
+</div>

@@ -18,6 +18,10 @@ export class ActorService {
     return this.ActorRef;
   }
 
+  getById(id:string): AngularFirestoreCollection<Actores> {
+    return  this.db.collection(this.dbPath, ref => ref.where('id', '==', id));
+  }
+
   create(actor: Actores): any {
     return this.ActorRef.add({ ...actor });
   }

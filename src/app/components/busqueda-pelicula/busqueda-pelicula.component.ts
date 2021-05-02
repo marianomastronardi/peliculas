@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Mode } from 'src/app/models/mode.enum';
 import { Pelicula } from 'src/app/models/pelicula';
+import { PeliculaService } from 'src/app/services/pelicula.service';
+import { map } from "rxjs/operators";
+import { Actores } from 'src/app/models/actores';
 
 @Component({
   selector: 'app-busqueda-pelicula',
@@ -11,57 +15,63 @@ export class BusquedaPeliculaComponent implements OnInit {
 
   listadoDePeliculas: Pelicula[] = [];
   peliculaSeleccionada!: Pelicula;
-  states: any = {};
-  borrado!: number;
+  bActorTable:boolean = false;
+  actorSelected!:Actores | undefined;
+  details:boolean = true;
 
-  constructor() {
-    this.listadoDePeliculas = [
-      { id: '01', nombre: 'Saw I', tipo: 'terror', fechaDeEstreno: '2021-04-01', cantidadDePublico: 200, fotoPelicula: 'https://images-na.ssl-images-amazon.com/images/I/91im2gYZrrL._SX342_.jpg', actores: [] },
-      { id: '02', nombre: 'About Time', tipo: 'amor', fechaDeEstreno: '2020-01-01', cantidadDePublico: 300, fotoPelicula: 'http://3.bp.blogspot.com/-29DpQgGyhtQ/UtmkM1t2m2I/AAAAAAAACCk/VBm4jVsu4rM/s1600/abouttime.jpg', actores: [] },
-      { id: '03', nombre: 'Mr Been', tipo: 'comedia', fechaDeEstreno: '2017-04-22', cantidadDePublico: 200, fotoPelicula: 'https://www.ecestaticos.com/imagestatic/clipping/188/97b/18897b37b59ad50a057130c20347ade6.jpg', actores: [] }
-    ]
-
-    this.borrado = 1;
-
-    this.states.create = false;
-    this.states.edit = false;
-    this.states.delete = false;
-    this.states.details = false;
+  constructor(private _peliculaService:PeliculaService
+    , private route:Router) {
+    this._peliculaService
+      .getAll()
+      .valueChanges()
+      /* .pipe(
+        map(changes =>
+          changes.map((c: any) => {
+            console.log('c', c)
+            //this.docID = c.payload.doc.id;
+            return ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+          }
+          )
+        )
+      ) */
+      .subscribe((data:any) => {
+        this.listadoDePeliculas = (data) ? data : []; 
+      })
     this.peliculaSeleccionada = new Pelicula();
+    this.bActorTable = false;
   }
 
   ngOnInit(): void {
   }
 
-  cargarNuevaPelicula(pelicula: Pelicula) {
-    this.listadoDePeliculas.push(pelicula);
-    this.changeMode(Mode.details);
+  nuevaPelicula() {
+    this.route.navigate(['/peliculas/alta'])
   }
 
   selectedMovie(pelicula: Pelicula) {
-    this.peliculaSeleccionada = pelicula;
-    this.changeMode(Mode.details);
+    this.peliculaSeleccionada = pelicula;    
+    this.actorSelected = undefined;
   }
 
   deleteMovie(pelicula: Pelicula) {
-    var ix = this.listadoDePeliculas.indexOf(pelicula);
-    if (ix > -1) {
-      this.listadoDePeliculas.splice(ix, 1);
-    }
-    if(this.peliculaSeleccionada == pelicula){
-      this.states.details = false;
-    }
+    this._peliculaService.getById(pelicula.id)
+    .snapshotChanges()
+    .pipe(
+      map(changes =>
+        changes.map((c: any) => {
+          console.log('c', c)
+          this._peliculaService.delete(c.payload.doc.id);
+          return ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        }
+        )
+      )
+    )
+    .subscribe()
   } 
 
-  loadAlta(mode: number) {
-    this.changeMode(mode);
-    this.peliculaSeleccionada = new Pelicula();
+  viewDetails(actor:Actores){
+    this.bActorTable = true;
+    this.actorSelected = actor;
   }
 
-  changeMode(mode: number) {
-    this.states.create = (mode == Mode.create);
-    this.states.edit = (mode == Mode.edit);
-    this.states.delete = (mode == Mode.delete);
-    this.states.details = (mode == Mode.details);
-  }
 }

@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="country">Pais</label>
-                        <input type="text" class="form-control" id="country" [(ngModel)]="actor.pais" placeholder="Ingrese un pais" formControlName="country">
+                        <input type="text" class="form-control" id="country" [(ngModel)]="actor.pais.name" placeholder="Ingrese un pais" formControlName="country">
                         <small class="invalid" *ngIf="fg.get('country')?.errors?.required && fg.get('country')?.touched">El pais es
                             requerido</small>
                     </div>
@@ -53,8 +53,16 @@
                             requerido</small>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="photo">Url Foto</label>
+                        <input type="text" class="form-control" id="photo" [(ngModel)]="actor.foto" formControlName="photo">
+                        <small class="invalid" *ngIf="fg.get('photo')?.errors?.required && fg.get('photo')?.touched">La
+                            foto es requerida</small>
+                    </div>
+                </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar</button>
+                <button class="btn btn-primary btn-lg btn-block" [disabled]="this.fg.status == 'INVALID'" type="submit">Guardar</button>
                 <hr>
                 <div class="alert alert-warning" *ngIf="!formValid" role="alert">
                     Debe completar todos los campoos.

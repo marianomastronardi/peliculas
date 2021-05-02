@@ -1,0 +1,9 @@
+<table>
+    <tbody>
+        <tr *ngFor="let actor of listadoActores">
+            <td><span>{{ actor.nombre }} {{actor.apellido}}</span></td>
+            <td><button class="btn btn-outline-primary m-1" (click)="cargarActorSeleccionado(actor)">Seleccionar Actor</button></td>
+            <td><button class="btn btn-outline-secondary m-1" (click)="deleteActor(actor)">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>

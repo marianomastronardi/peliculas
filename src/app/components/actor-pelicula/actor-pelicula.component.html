@@ -1,1 +1,31 @@
-<p>actor-pelicula works!</p>
+<main role="main">
+    <br>
+    <button class="btn btn-outline-dark" (click)="nuevoActor()">Nuevo Actor</button>
+    <br>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <app-listado-actores (eventSelectedActor)="actorSeleccionado($event)" [listadoActores]="listadoActores"></app-listado-actores>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <app-peliculas-list *ngIf="selectedActor" [listaPeliculas]="moviesSelectedActor"></app-peliculas-list>
+            </div>
+            <div class="col-md-4">
+                <app-pais-profile *ngIf="selectedActor" [pais]="selectedActor.pais"></app-pais-profile>
+            </div>
+            <div class="col-md-4">
+                <app-tabla-actor *ngIf="selectedActor" [actor]="selectedActor"></app-tabla-actor>
+            </div>
+        </div>
+
+        <hr>
+
+    </div>
+    <!-- /container -->
+
+</main>
